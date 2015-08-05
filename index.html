@@ -5,28 +5,10 @@
     <title>Hello React!</title>
     <script src="react/react.js"></script>
     <script src="react/JSXTransformer.js"></script>
-    <script type="text/jsx" src="core.js"></script>
   </head>
   <body>
     <div id="example"></div>
-    <script type="text/jsx">
 
-    var Root = React.createClass({
-
-        render: function() {
-
-            return (
-                <div>
-                    <h2>First React Component</h2>
-                </div>
-            );
-        }
-    });
-
-      React.render(
-        <Root />,
-        document.getElementById('example')
-      );
-    </script>
+    <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
   </body>
 </html>
