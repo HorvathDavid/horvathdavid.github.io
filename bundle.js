@@ -95,9 +95,13 @@
 	        "div",
 	        { className: "col-xs-12" },
 	        React.createElement(
-	          "h1",
-	          null,
-	          "My toughts.."
+	          "div",
+	          { className: "page-header text-center" },
+	          React.createElement(
+	            "h1",
+	            null,
+	            "My toughts.."
+	          )
 	        )
 	      )
 	    );
@@ -115,18 +119,35 @@
 	module.exports = React.createClass({
 	  displayName: 'exports',
 
-	  render: function render() {
+	  getInitialState: function getInitialState() {
+	    return {
+	      menuElements: null
+	    };
+	  },
 
-	    var menuTexts = ['one', 'two', 'three'];
-
-	    var menuElements = menuTexts.map(function (menuText) {
-	      return React.createElement(MenuComponent, { text: menuText });
+	  componentWillMount: function componentWillMount() {
+	    var alma = new Promise(function (resolve, reject) {
+	      $.get('../../static/mock-data/menu-element.json', function (data) {
+	        resolve(data);
+	      });
 	    });
+	    alma.then((function (data) {
+	      var menuElements = data.map(function (elem) {
+	        return React.createElement(MenuComponent, { elem: elem });
+	      });
+
+	      this.setState({
+	        menuElements: menuElements
+	      });
+	    }).bind(this));
+	  },
+
+	  render: function render() {
 
 	    return React.createElement(
 	      'div',
 	      { className: 'row menu-column-sub' },
-	      menuElements
+	      this.state.menuElements
 	    );
 	  }
 	});
@@ -142,7 +163,7 @@
 
 	  render: function render() {
 
-	    var text = this.props.text;
+	    var elem = this.props.elem;
 
 	    return React.createElement(
 	      "div",
@@ -156,13 +177,13 @@
 	          React.createElement(
 	            "h3",
 	            { "class": "panel-title" },
-	            text
+	            elem.title
 	          )
 	        ),
 	        React.createElement(
 	          "div",
 	          { "class": "panel-body" },
-	          "Panel content"
+	          elem.text
 	        )
 	      )
 	    );
