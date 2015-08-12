@@ -146,7 +146,7 @@
 
 	    return React.createElement(
 	      "div",
-	      { className: "col-xs-12 col-sm-6 col-md-4" },
+	      { className: "col-xs-12 col-sm-6 col-md-4 text-center" },
 	      React.createElement(
 	        "div",
 	        { "class": "panel panel-default" },
