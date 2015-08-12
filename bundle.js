@@ -47,7 +47,6 @@
 	'use strict';
 
 	var AppRoot = __webpack_require__(1);
-
 	var _ = __webpack_require__(6);
 
 	window._ = _;
@@ -60,10 +59,9 @@
 
 	'use strict';
 
-	var CommentBox = __webpack_require__(2);
-	var HeaderComponent = __webpack_require__(3);
-	var ContentComponent = __webpack_require__(4);
-	var FooterComponent = __webpack_require__(5);
+	var HeaderSub = __webpack_require__(2);
+	var MenuColumnSub = __webpack_require__(3);
+	var FooterSub = __webpack_require__(5);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -72,11 +70,10 @@
 
 	    return React.createElement(
 	      'div',
-	      null,
-	      React.createElement(HeaderComponent, null),
-	      React.createElement(ContentComponent, null),
-	      React.createElement(CommentBox, null),
-	      React.createElement(FooterComponent, null)
+	      { className: 'container' },
+	      React.createElement(HeaderSub, null),
+	      React.createElement(MenuColumnSub, null),
+	      React.createElement(FooterSub, null)
 	    );
 	  }
 	});
@@ -85,7 +82,7 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	module.exports = React.createClass({
 	  displayName: "exports",
@@ -93,26 +90,43 @@
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      { className: "commentBox" },
-	      "Hello, world! I am a CommentBox."
+	      { className: "row" },
+	      React.createElement(
+	        "div",
+	        { className: "col-xs-12" },
+	        React.createElement(
+	          "h1",
+	          null,
+	          "My toughts.."
+	        )
+	      )
 	    );
 	  }
 	});
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var MenuComponent = __webpack_require__(4);
 
 	module.exports = React.createClass({
-	  displayName: "exports",
+	  displayName: 'exports',
 
 	  render: function render() {
+
+	    var menuTexts = ['one', 'two', 'three'];
+
+	    var menuElements = menuTexts.map(function (menuText) {
+	      return React.createElement(MenuComponent, { text: menuText });
+	    });
+
 	    return React.createElement(
-	      "h1",
-	      null,
-	      "Such a header"
+	      'div',
+	      { className: 'row menu-column-sub' },
+	      menuElements
 	    );
 	  }
 	});
@@ -121,19 +135,35 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	module.exports = React.createClass({
 	  displayName: "exports",
 
 	  render: function render() {
+
+	    var text = this.props.text;
+
 	    return React.createElement(
-	      "section",
-	      null,
+	      "div",
+	      { className: "col-xs-12 col-sm-6 col-md-4" },
 	      React.createElement(
 	        "div",
-	        null,
-	        "Such a content"
+	        { "class": "panel panel-default" },
+	        React.createElement(
+	          "div",
+	          { "class": "panel-heading" },
+	          React.createElement(
+	            "h3",
+	            { "class": "panel-title" },
+	            text
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { "class": "panel-body" },
+	          "Panel content"
+	        )
 	      )
 	    );
 	  }
@@ -143,7 +173,7 @@
 /* 5 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	module.exports = React.createClass({
 	  displayName: "exports",
@@ -151,8 +181,17 @@
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      null,
-	      "Such a footer"
+	      { className: "row footer-sub" },
+	      React.createElement(
+	        "p",
+	        null,
+	        "Please send me email on: ",
+	        React.createElement(
+	          "a",
+	          { href: "mailto:" },
+	          "some.email@email"
+	        )
+	      )
 	    );
 	  }
 	});

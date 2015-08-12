@@ -1,5 +1,4 @@
 var AppRoot = require('./app/AppRoot.jsx');
-
 var _ = require('./thirdparty/underscore.js');
 
 window._ = _;
